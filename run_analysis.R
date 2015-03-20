@@ -1,4 +1,9 @@
-## 
+## Main function for Course Project
+## In R console run getdata012.run() if the data for the project locates in 
+## working directory. Or run getdata012.run(offline = FALSE) with downloading 
+## data from internet. As result, function will return tidy data set with the 
+## average of each variable for each activity and each subject, also same tidy 
+## data will be save in tidy_data.txt file.
 getdata012.run <- function(offline = TRUE) {
   f <- "getdata-projectfiles-UCI HAR Dataset.zip"
   if (!offline) getdata012.download(f)
@@ -11,12 +16,14 @@ getdata012.run <- function(offline = TRUE) {
   y
 }
 
+## Download row data from internet in zip file
+## f - target file name
 getdata012.download <- function(f) {
-  u <- url("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip")
-  f <- "getdata-projectfiles-UCI HAR Dataset.zip"
-  download.file(u, f, method = "curl")
+  u <- "http://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+  download.file(u, f)
 }
 
+## Reads and merges the training and the test sets to create one data set
 getdata012.read <- function() {
   features <- read.table("./UCI HAR Dataset/features.txt")
   xTrain <- read.table("./UCI HAR Dataset/train/X_train.txt")
@@ -36,12 +43,16 @@ getdata012.read <- function() {
   x
 }
 
+## Extracts only the measurements on the mean and standard deviation for each measurement
+## x - data from getdata012.read
 getdata012.select <- function(x) {
   require(dplyr)
   x %>% 
     select(subject, activity, contains("mean."), contains("std."))
 }
 
+## Changes activity ids on descriptive activity names in the data set
+## x - data from getdata012.read or from getdata012.select
 getdata012.activity <- function(x) {
   activityLabels <- read.table("./UCI HAR Dataset/activity_labels.txt")
   require(dplyr)
@@ -49,6 +60,8 @@ getdata012.activity <- function(x) {
     mutate(activity = as.factor(activityLabels[activity, 2]))
 }
 
+## Creates tidy data set with the average of each variable for each activity and each subject
+## x - data from getdata012.read or from getdata012.select or from getdata012.activity
 getdata012.group <- function(x) {
   require(dplyr)
   x <- x %>%
