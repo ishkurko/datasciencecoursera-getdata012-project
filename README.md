@@ -1,31 +1,39 @@
-# Project Name
+# Coursers Getting and Cleaning Data Course Project
 
-TODO: Write a project description
+This project provides a Course Project for peer assessment for Coursera Getting and Cleaning Data.
+The purpose of this project is to demonstrate ability to collect, work with, and clean a data set. The goal is to prepare tidy data that can be used for later analysis.
+
+Project contains:
+1. A code book that describes the variables, the data, and any transformations or work that you performed to clean up the data called CodeBook.md.
+2. Script for data transformation run_analysis.R.
+3. This README.md.
 
 ## Installation
 
-TODO: Describe the installation process
+Checkout file run_analysis.R and execute in R console.
+Follow R functions will be loaded:
+- getdata012.run - main function for Course Project
+- getdata012.download - will download row data from internet in zip file
+- getdata012.read - reads amd merges the training and the test sets to create one data set
+- getdata012.select - extracts only the measurements on the mean and standard deviation for each measurement
+- getdata012.activity - changes activity ids on descriptive activity names in the data set
+- getdata012.group - creates tidy data set with the average of each variable for each activity and each subject
 
 ## Usage
 
-TODO: Write usage instructions
-
-## Contributing
-
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+In R console run <code>getdata012.run()</code> if the data for the project locates in working directory.
+Or run <code>getdata012.run(offline = FALSE)/code> with downloading data from internet.
+As result, function will return tidy data set with the average of each variable for each activity and each subject, also same tidy data will be save in <code>tidy_data.txt</code> file.
+More details in <code>CodeBook.md</code>
 
 ## History
 
-Version 1.0 - initial version
+Version 1.0 - initial version for assessment
 
-## Credits
+## Credits 
 
-TODO: Write credits
+- Ihor Shkurko (<ishkurko@gmail.com>)
 
-## License
+## License: Creative Commons 3.0 License
 
-TODO: Write license
+This work is licensed under the Creative Commons Attribution 3.0 Unported License. To view a copy of this license, visit http://creativecommons.org/licenses/by/3.0/.F
